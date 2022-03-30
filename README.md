@@ -1,3 +1,6 @@
-# fe-algorithm
-- 前端刷算法
-- 引入 jest 单元测试
+代码练习
+>  引入 jest 单元测试
+
+- leetcode
+- javascript
+- typescript
