@@ -1,0 +1,25 @@
+{
+  "name": "fe-algorithm",
+  "version": "1.0.0",
+  "description": "前端刷算法",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mewcoder/fe-algorithm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mewcoder/fe-algorithm/issues"
+  },
+  "homepage": "https://github.com/mewcoder/fe-algorithm#readme",
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
+    "babel-jest": "^27.5.1",
+    "jest": "^27.5.1"
+  }
+}
