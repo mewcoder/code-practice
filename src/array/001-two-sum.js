@@ -15,4 +15,5 @@ export function twoSum(nums, target) {
     if (map.has(n2)) return [map.get(n2), i];
     else map.set(n1, i);
   }
+  return [];
 }

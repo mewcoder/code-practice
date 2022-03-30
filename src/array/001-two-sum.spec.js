@@ -12,7 +12,7 @@ describe("twoSum", () => {
   });
 
   test("case 3", () => {
-    const res = twoSum([3, 3], 6);
+    const res = twoSum([3, 3], 5);
     expect(res).toEqual([0, 1]);
   });
 });
