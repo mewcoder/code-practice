@@ -1,7 +1,9 @@
 /**
  *
- * @param {*} obj
- * @param  {...any} args
+ * @description 实现call
+ * @param {*} obj 对象
+ * @param  {...any} args 参数
+ * @returns fn
  */
 export function myCall(obj, ...args) {
   const ctx = obj || globalThis;
@@ -12,6 +14,12 @@ export function myCall(obj, ...args) {
   return res;
 }
 
+/**
+ * @description 实现apply
+ * @param {*} obj 对象
+ * @param {*} args 参数数组
+ * @returns fn
+ */
 export function myApply(obj, args) {
   const ctx = obj || globalThis;
   const fn = Symbol();
@@ -21,6 +29,12 @@ export function myApply(obj, args) {
   return res;
 }
 
+/**
+ * @description 实现bind
+ * @param {*} obj 对象
+ * @param {*} args 参数
+ * @returns fn
+ */
 export function myBind(obj, ...args1) {
   const ctx = obj || globalThis;
   const fn = Symbol();
