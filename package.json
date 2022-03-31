@@ -1,21 +1,21 @@
 {
-  "name": "fe-algorithm",
+  "name": "code-practice",
   "version": "1.0.0",
-  "description": "前端刷算法",
+  "description": "代码练习",
   "main": "index.js",
   "scripts": {
     "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mewcoder/fe-algorithm.git"
+    "url": "git+https://github.com/mewcoder/code-practice.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mewcoder/fe-algorithm/issues"
+    "url": "https://github.com/mewcoder/code-practice/issues"
   },
-  "homepage": "https://github.com/mewcoder/fe-algorithm#readme",
+  "homepage": "https://github.com/mewcoder/code-practice#readme",
   "devDependencies": {
     "@babel/core": "^7.17.8",
     "@babel/preset-env": "^7.16.11",

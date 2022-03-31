@@ -1,4 +1,4 @@
-import { myCall, myApply, myBind } from "./01-this";
+import { myCall, myApply, myBind } from "./02-this";
 
 const o = {
   a: 1,
@@ -8,7 +8,7 @@ function add(b, c = 0) {
   return this.a + b + c;
 }
 
-describe("01-this", () => {
+describe("02-this", () => {
   it("call", () => {
     Function.prototype.myCall = myCall;
     expect(add.myCall(o, 2)).toBe(3);
