@@ -1,0 +1,22 @@
+- object
+  - new
+  - instanceof
+  - Object.create
+- this
+  - call
+  - apply
+  - bind
+- function
+  - curry
+- array
+  - forEach
+  - map
+  - filter
+  - every
+  - some
+  - find
+  - findIndex
+- array2
+  - flat
+- string
+  - reverse
