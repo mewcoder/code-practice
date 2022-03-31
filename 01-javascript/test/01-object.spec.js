@@ -1,4 +1,4 @@
-import { myNew, myNew2, myInstanceOf, create } from "./01-object";
+import { myNew, myNew2, myInstanceOf, create } from "../01-object";
 
 describe("01-object", () => {
   it("myNew", () => {

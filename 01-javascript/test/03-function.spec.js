@@ -1,4 +1,4 @@
-import { curry } from "./03-function";
+import { curry } from "../03-function";
 
 describe("03-function", () => {
   it("curry", () => {

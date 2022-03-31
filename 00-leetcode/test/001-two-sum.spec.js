@@ -1,4 +1,4 @@
-import { twoSum } from "./001-two-sum";
+import { twoSum } from "../array/001-two-sum";
 
 describe("twoSum", () => {
   test("case 1", () => {

@@ -1,4 +1,4 @@
-import { myCall, myApply, myBind } from "./02-this";
+import { myCall, myApply, myBind } from "../02-this";
 
 const o = {
   a: 1,

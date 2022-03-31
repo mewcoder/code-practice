@@ -6,7 +6,7 @@ import {
   _some,
   _find,
   _findIndex,
-} from "./04-array";
+} from "../04-array";
 
 describe("04-array", () => {
   it("forEach", () => {

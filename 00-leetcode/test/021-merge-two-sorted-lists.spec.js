@@ -1,4 +1,4 @@
-import { mergeTwoLists, mergeTwoLists2 } from "./021-merge-two-sorted-lists";
+import { mergeTwoLists, mergeTwoLists2 } from "../linked-list/021-merge-two-sorted-lists";
 
 function ListNode(val, next) {
   this.val = val === undefined ? 0 : val;
