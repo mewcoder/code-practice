@@ -1,14 +1,15 @@
-import { convert } from "./arr-to-tree";
+import { list2Tree, tree2List } from "./convert-data";
 
-describe("arr-to-tree", () => {
-  const arr = [
+describe("convert-data", () => {
+  const list = [
+    { id: 0, name: "A", parentId: -1 }, // -1 代表顶级节点，无父节点
+    { id: 1, name: "B", parentId: 0 },
+    { id: 2, name: "C", parentId: 0 },
     { id: 3, name: "D", parentId: 1 },
     { id: 4, name: "E", parentId: 1 },
     { id: 5, name: "F", parentId: 2 },
-    { id: 0, name: "A", parentId: -1 }, // -1 代表顶级节点，无父节点
-    { id: 1, name: "B", parentId: 0 },
-    { id: 2, name: "C", parentId: 0 }
   ];
+
   const tree = {
     id: 0,
     name: "A",
@@ -31,7 +32,12 @@ describe("arr-to-tree", () => {
       },
     ],
   };
-  it("convert", () => {
-    expect(convert(arr)).toEqual(tree);
+
+  it("list2Tree", () => {
+    expect(list2Tree(list)).toEqual(tree);
+  });
+
+  it("tree2List", () => {
+    expect(tree2List(tree)).toEqual(list);
   });
 });

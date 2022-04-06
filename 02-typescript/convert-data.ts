@@ -5,7 +5,7 @@ interface Item {
   children?: Item[];
 }
 
-export function convert(list: Item[]): Item | null {
+export function list2Tree(list: Item[]): Item | null {
   // 用于 id 和 treeNode 的映射
   const nodeMap: Map<number, Item> = new Map();
   let root = null;
@@ -32,6 +32,19 @@ export function convert(list: Item[]): Item | null {
   return root;
 }
 
-/**
- *  方案： 先找第一级，再找下级迭代查找  --  时间复杂度 O(n^2) 不推荐
- */
+export function tree2List(root: Item): Item[] {
+  const res: Item[] = [];
+
+  const queue: Item[] = [root];
+  while (queue.length) {
+    const node = queue.pop();
+    if (!node) break;
+    const { id, name, parentId, children = [] } = node;
+    res.push({ id, name, parentId });
+    children.forEach((child) => {
+      queue.unshift(child);
+    });
+  }
+
+  return res;
+}
