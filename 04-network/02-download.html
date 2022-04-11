@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>download</title>
+  </head>
+  <body>
+    <div><input type="file" id="input" /></div>
+    <div style="margin-top: 20px"><button id="btn">下载</button></div>
+
+    <script>
+      /* input上传图片预览 */
+      document.getElementById("input").addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        console.log(file);
+        reader.readAsDataURL(file); // base64
+        reader.onload = () => {
+          console.log(reader.result);
+          // 新建图片标签预览
+          const img = document.createElement("img");
+          img.src = reader.result;
+          document.body.appendChild(img);
+        };
+      });
+
+      document.getElementById("btn").onclick = function () {
+        /* blob生成文件下载 */
+        const str = "<div>download</div>";
+        // 包装后的文件类型不能直接修改
+        const blob = new Blob([str], {
+          type: "text/html",
+        });
+
+        const a = document.createElement("a");
+        const url = URL.createObjectURL(blob);
+        a.download = "down.txt";
+        a.href = URL.createObjectURL(blob);
+        a.click();
+        URL.revokeObjectURL(url);
+      };
+    </script>
+  </body>
+</html>
