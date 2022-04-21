@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hello etcd</title>
+  </head>
+  <body>
+    <h3>hello etcd</h3>
+    <hr />
+    <div>
+      <div>add:</div>
+      <form id="addForm">
+        <input type="text" name="page" placeholder="page" />
+        <input type="text" name="count" placeholder="count" />
+        <input type="submit" value="添加" />
+      </form>
+    </div>
+    <hr />
+    <ul id="list"></ul>
+    <script>
+      getList(); // 调用方法
+
+      // 添加
+      document.getElementById("addForm").onsubmit = function (e) {
+        e.preventDefault();
+        const data = new FormData(e.target);
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://api.apiopen.top/getJoke");
+        xhr.send(data);
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            const res = JSON.parse(xhr.responseText);
+            console.log(res);
+            if (res.code === 200) {
+              alert("添加成功");
+              getList(); // 调用方法
+            }
+          }
+        };
+      };
+
+      // 获取列表数据
+      function getList() {
+        const xhr = new XMLHttpRequest();
+        xhr.open(
+          "GET",
+          "https://api.apiopen.top/getJoke?page=1&count=10&type=video"
+        );
+        xhr.onload = function () {
+          const res = JSON.parse(xhr.responseText);
+          console.log(res);
+          if (res.code === 200) {
+            const list = res.result;
+            let innerHTML = "";
+            for (let i = 0; i < list.length; i++) {
+              innerHTML += `<li>${list[i].text}</li>`;
+            }
+            document.getElementById("list").innerHTML = innerHTML;
+          }
+        };
+        xhr.send();
+      }
+    </script>
+  </body>
+</html>
