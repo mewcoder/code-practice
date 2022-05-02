@@ -49,7 +49,7 @@ export function myInstanceOf(obj, Type) {
 }
 
 /**
- * @description 实现new
+ * @description 实现create
  * Object.create() 方法创建一个新对象，使用现有的对象来提供新创建的对象的__proto__
  * 第二个参数不支持
  * @param {*} proto 原型对象

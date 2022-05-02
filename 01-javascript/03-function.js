@@ -13,3 +13,12 @@ export function curry(fn, ...args) {
     }
     : fn(...args)
 }
+
+
+export function compose(...fns) {
+  return fns.reduceRight((a, b) => {
+    return (...args) => {
+      return a(b(...args))
+    }
+  })
+}
