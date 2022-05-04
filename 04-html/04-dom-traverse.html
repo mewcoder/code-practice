@@ -45,11 +45,11 @@
       const stack = []
       stack.push(root)
       while (stack.length) {
+        // 注意 dfs 遍历的时候要用pop，性能消耗小
         const node = stack.pop() // 后进先出
         if (!node) break
         visitNode(node)
         const childNodes = node.childNodes
-        debugger
         if (childNodes.length) {
           // reverse 反顺序压栈
           Array.from(childNodes).reverse().forEach(child => {

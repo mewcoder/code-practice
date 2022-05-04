@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="div1" style="border: 1px solid #ccc; padding: 10px;">
+    <p>一行文字<a href="7235af94741a03d602773178d6fcfde9" target="_blank">链接</a></p>
+    <img src="xxx.png" alt="图片" class="image" />
+    <button click="clickHandler">点击</button>
+  </div>
+</body>
+<script>
+  // vdom 就是用 JS 对象的形式来表示 DOM 结构,vnode 即对应着 DOM 结构的一个 node 节点
+
+  class VNode {
+    constructor(tag, data) {
+      this.tag = tag
+      this.data = data
+      this.children = []
+    }
+  }
+
+
+  function getVDom(node) {
+    if (node.nodeType === 1) {
+      let attrs = node.attributes // 节点属性
+      let data = {}
+      Array.from(attrs).forEach(attr => {
+        data[attr.name] = attr.value
+      })
+      return {
+        tag: node.nodeName.toLowerCase(),
+        data,
+        children: Array.from(node.childNodes).map(child => getVDom(child)).filter(d => d)
+      }
+    } else if (node.nodeType === 3 && node.textContent.trim()) {
+      return node.textContent.trim()
+    }
+  }
+  console.log(getVDom(document.getElementById('div1')))
+
+  //  对于文档节点来说, nodeValue返回null
+  //  对于text, comment节点来说, nodeValue返回该节点的文本内容
+  //  属性节点的 nodeValue
+
+  // nodeName
+  // Element=tagName  text ='#text'  comment='#comment'
+  // Attr= Attr.name
+
+  // childNodes会把空字符和回车 看成 文本节点  使用正则 /s可以匹配空字符和回车
+
+</script>
+
+
+</html>

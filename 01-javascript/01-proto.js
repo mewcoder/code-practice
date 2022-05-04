@@ -56,7 +56,7 @@ export function myInstanceOf(obj, Type) {
  * @returns 对象
  */
 export function create(proto) {
-  function F() {}
+  function F() { }
   F.prototype = proto;
   return new F();
 }
