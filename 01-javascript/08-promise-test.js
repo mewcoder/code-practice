@@ -21,7 +21,6 @@ const promiseFuncGenerator = (num) =>
 
 /**
  * @desc 控制promise并发
- * lazyman
  * delay
  */
 (function () {
@@ -93,8 +92,8 @@ const promiseFuncGenerator = (num) =>
 
 (function () {
   class Scheduler {
-    constructor() {
-      this.max = 2;
+    constructor(n) {
+      this.max = n || 2;
       this.num = 0;
       this.task = []; // 当前执行任务队列
     }
@@ -102,29 +101,105 @@ const promiseFuncGenerator = (num) =>
     add(asyncTask) {
       // console.log(this.num);
       this.task.push(asyncTask);
-      if (this.num < this.max) {
-        this.run();
-      }
+      this.run();
     }
 
     run() {
-      if (this.task.length) {
+      if (this.num < this.max && this.task.length) {
         this.num++;
-        this.task
-          .shift()()
-          .then(() => {
-            // console.log(this.num);
-            this.num--;
-            this.run();
-          });
+        const fn = this.task.shift();
+        fn().then(() => {
+          this._next();
+        }).catch(() => {
+          this._next();
+        })
       }
+    }
+
+    _next() {
+      this.num--;
+      this.run();
+    }
+  }
+  const scheduler = new Scheduler();
+
+  // const arr = promiseFuncGenerator(15);
+  // for (let i = 0; i < arr.length; i++) {
+  //   scheduler.add(arr[i]);
+  // }
+})();
+
+
+class Scheduler {
+  constructor(n) {
+    this.max = n || 2;
+    this.num = 0;
+    this.task = []; // 当前执行任务队列
+  }
+
+  add(asyncTask) {
+    // console.log(this.num);
+    this.task.push(asyncTask);
+    this.run();
+  }
+
+  run() {
+    if (this.num < this.max && this.task.length) {
+      this.num++;
+      const fn = this.task.shift();
+      fn().then(() => {
+        this._next();
+      }).catch(() => {
+        this._next();
+      })
+    }
+  }
+
+  _next() {
+    this.num--;
+    this.run();
+  }
+}
+
+// 优先级队列
+(function () {
+  class Scheduler {
+    constructor(n) {
+      this.max = n || 2;
+      this.num = 0;
+      this.task = []; // 当前执行任务队列
+    }
+
+    add(asyncTask) {
+      this.task.push(asyncTask);
+      this.run();
+    }
+
+    run() {
+      if (this.num < this.max && this.task.length) {
+        this.num++;
+        const { fn } = this.task.sort((a, b) => b.priority - a.priority).shift();
+        fn().then(() => {
+          this._next();
+        }).catch(() => {
+          this._next();
+        })
+      }
+    }
+
+    _next() {
+      this.num--;
+      this.run();
     }
   }
 
   const scheduler = new Scheduler();
 
-  const arr = promiseFuncGenerator(10);
-  for (let i = 0; i < 10; i++) {
-    scheduler.add(arr[i]);
+  const arr = promiseFuncGenerator(15);
+  for (let i = 0; i < arr.length; i++) {
+    scheduler.add({
+      fn: arr[i],
+      priority: i
+    });
   }
-})();
+})()
