@@ -100,3 +100,5 @@ function compile(templete) {
 }
 
 compile(templete);
+
+// https://github.com/shengxinjing/weiyouyi
