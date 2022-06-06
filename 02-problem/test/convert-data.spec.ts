@@ -1,4 +1,4 @@
-import { LazyMan } from "../lazyman";
+import { LazyMan } from "../lazyman.ts";
 
 describe("lazyman", () => {
   const me = new LazyMan("Tom");
