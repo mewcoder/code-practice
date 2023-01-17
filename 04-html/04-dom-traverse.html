@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>写一个函数遍历 DOM 树，分别用深度优先和广度优先</title>
+</head>
+
+<body>
+  <div id="dom">
+    <p>hello <b>world</b></p>
+    <img />
+    <!--注释-->
+    <ul>
+      <li>a</li>
+      <li>b</li>
+    </ul>
+  </div>
+
+  <script>
+    const root = document.getElementById('dom');
+    function visitNode(node) {
+      if (node.nodeType === 1) {
+        console.log(node.nodeName.toLowerCase());
+      } else if (node.nodeType === 3) {
+        node.textContent.trim() && console.log(node.textContent);
+      } else if (node.nodeType === 8) {
+        console.log(node.textContent);
+      }
+    }
+    function dfs1(root) {
+      visitNode(root)
+      const childNodes = root.childNodes
+      if (childNodes.length) {
+        childNodes.forEach(child => {
+          dfs1(child) // 递归
+        })
+      }
+    }
+    dfs1(root)
+    console.log('------------------')
+    function dfs2(root) {
+      const stack = []
+      stack.push(root)
+      while (stack.length) {
+        // 注意 dfs 遍历的时候要用pop，性能消耗小
+        const node = stack.pop() // 后进先出
+        if (!node) break
+        visitNode(node)
+        const childNodes = node.childNodes
+        if (childNodes.length) {
+          // reverse 反顺序压栈
+          Array.from(childNodes).reverse().forEach(child => {
+            stack.push(child)
+          })
+        }
+
+      }
+    }
+    dfs2(root)
+    console.log('------------------')
+    function bfs(root) {
+      const queue = [] //先进先出
+      // 根节点入队列
+      queue.unshift(root)
+      while (queue.length > 0) {
+        const node = queue.pop()
+        if (!node) break
+        visitNode(node)
+        // 子节点入队
+        const childNodes = node.childNodes
+        debugger
+        if (childNodes.length) {
+          childNodes.forEach(child => queue.unshift(child))
+        }
+      }
+    }
+    bfs(root)
+  </script>
+
+</body>
+
+</html>
